@@ -3,10 +3,20 @@ import MenuBar from '../components/MenuBar.js'
 import { Profile, Photos, Cocktails, Pokemon} from '../components/Pages.js'
 
 class MainBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedPage: 0,
+    }
+  }
 
-
+  handleSelect = (index) => {
+    this.setState({
+      selectedPage: index,
+    })
+  }
   render() {
-
+    
     /*
 
     Replace the code below! Depending on what menu item is selected in the menu, 
@@ -16,13 +26,17 @@ class MainBox extends React.Component {
     these methods be called?
 
     */
-
-    const detailsToDisplay = <div>Hi, I'm a div!</div>
+    const idComponentMap = {
+      0: <Profile />,
+      1: <Photos />,
+      2: <Cocktails />,
+      3: <Pokemon />,
+    }
 
     return (
       <div>
-        <MenuBar />
-        {detailsToDisplay}
+        <MenuBar handleSelect={this.handleSelect} selectedPage={this.state.selectedPage}/>
+        {idComponentMap[this.state.selectedPage]}
       </div>
     )
   }
